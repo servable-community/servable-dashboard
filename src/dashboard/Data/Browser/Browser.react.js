@@ -5,37 +5,37 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import { ActionTypes }                    from 'lib/stores/SchemaStore';
-import AddColumnDialog                    from 'dashboard/Data/Browser/AddColumnDialog.react';
-import CategoryList                       from 'components/CategoryList/CategoryList.react';
-import CreateClassDialog                  from 'dashboard/Data/Browser/CreateClassDialog.react';
-import DashboardView                      from 'dashboard/DashboardView.react';
-import DataBrowser                        from 'dashboard/Data/Browser/DataBrowser.react';
+import { ActionTypes } from 'lib/stores/SchemaStore';
+import AddColumnDialog from 'dashboard/Data/Browser/AddColumnDialog.react';
+import CategoryList from 'components/CategoryList/CategoryList.react';
+import CreateClassDialog from 'dashboard/Data/Browser/CreateClassDialog.react';
+import DashboardView from 'dashboard/DashboardView.react';
+import DataBrowser from 'dashboard/Data/Browser/DataBrowser.react';
 import { DefaultColumns, SpecialClasses } from 'lib/Constants';
-import DeleteRowsDialog                   from 'dashboard/Data/Browser/DeleteRowsDialog.react';
-import DropClassDialog                    from 'dashboard/Data/Browser/DropClassDialog.react';
-import EmptyState                         from 'components/EmptyState/EmptyState.react';
-import ExportDialog                       from 'dashboard/Data/Browser/ExportDialog.react';
-import AttachRowsDialog                   from 'dashboard/Data/Browser/AttachRowsDialog.react';
-import AttachSelectedRowsDialog           from 'dashboard/Data/Browser/AttachSelectedRowsDialog.react';
-import CloneSelectedRowsDialog            from 'dashboard/Data/Browser/CloneSelectedRowsDialog.react';
-import EditRowDialog                      from 'dashboard/Data/Browser/EditRowDialog.react';
-import ExportSelectedRowsDialog           from 'dashboard/Data/Browser/ExportSelectedRowsDialog.react';
-import ExportSchemaDialog                 from 'dashboard/Data/Browser/ExportSchemaDialog.react';
-import { List, Map }                      from 'immutable';
-import Notification                       from 'dashboard/Data/Browser/Notification.react';
-import Parse                              from 'parse';
-import prettyNumber                       from 'lib/prettyNumber';
-import queryFromFilters                   from 'lib/queryFromFilters';
-import React                              from 'react';
-import RemoveColumnDialog                 from 'dashboard/Data/Browser/RemoveColumnDialog.react';
-import PointerKeyDialog                   from 'dashboard/Data/Browser/PointerKeyDialog.react';
-import SidebarAction                      from 'components/Sidebar/SidebarAction';
-import stringCompare                      from 'lib/stringCompare';
-import styles                             from 'dashboard/Data/Browser/Browser.scss';
-import subscribeTo                        from 'lib/subscribeTo';
-import * as ColumnPreferences             from 'lib/ColumnPreferences';
-import { Helmet }                         from 'react-helmet';
+import DeleteRowsDialog from 'dashboard/Data/Browser/DeleteRowsDialog.react';
+import DropClassDialog from 'dashboard/Data/Browser/DropClassDialog.react';
+import EmptyState from 'components/EmptyState/EmptyState.react';
+import ExportDialog from 'dashboard/Data/Browser/ExportDialog.react';
+import AttachRowsDialog from 'dashboard/Data/Browser/AttachRowsDialog.react';
+import AttachSelectedRowsDialog from 'dashboard/Data/Browser/AttachSelectedRowsDialog.react';
+import CloneSelectedRowsDialog from 'dashboard/Data/Browser/CloneSelectedRowsDialog.react';
+import EditRowDialog from 'dashboard/Data/Browser/EditRowDialog.react';
+import ExportSelectedRowsDialog from 'dashboard/Data/Browser/ExportSelectedRowsDialog.react';
+import ExportSchemaDialog from 'dashboard/Data/Browser/ExportSchemaDialog.react';
+import { List, Map } from 'immutable';
+import Notification from 'dashboard/Data/Browser/Notification.react';
+import Parse from 'parse';
+import prettyNumber from 'lib/prettyNumber';
+import queryFromFilters from 'lib/queryFromFilters';
+import React from 'react';
+import RemoveColumnDialog from 'dashboard/Data/Browser/RemoveColumnDialog.react';
+import PointerKeyDialog from 'dashboard/Data/Browser/PointerKeyDialog.react';
+import SidebarAction from 'components/Sidebar/SidebarAction';
+import stringCompare from 'lib/stringCompare';
+import styles from 'dashboard/Data/Browser/Browser.scss';
+import subscribeTo from 'lib/subscribeTo';
+import * as ColumnPreferences from 'lib/ColumnPreferences';
+import { Helmet } from 'react-helmet';
 import generatePath from 'lib/generatePath';
 import { withRouter } from 'lib/withRouter';
 
@@ -170,7 +170,7 @@ class Browser extends DashboardView {
     }
 
     this.props.schema.dispatch(ActionTypes.FETCH)
-    .then(() => this.handleFetchedSchema());
+      .then(() => this.handleFetchedSchema());
     if (!this.props.params.className && this.props.schema.data.get('classes')) {
       this.redirectToFirstClass(this.props.schema.data.get('classes'));
     } else if (this.props.params.className) {
@@ -312,7 +312,7 @@ class Browser extends DashboardView {
 
   dropClass(className) {
     this.props.schema.dispatch(ActionTypes.DROP_CLASS, { className }).then(() => {
-      this.setState({showDropClassDialog: false });
+      this.setState({ showDropClassDialog: false });
       delete this.state.counts[className];
       this.props.navigate(generatePath(this.context, 'browser'));
     }, (error) => {
@@ -412,13 +412,13 @@ class Browser extends DashboardView {
       this.setState({
         newObject: (relation ?
           new Parse.Object(relation.targetClassName)
-        : new Parse.Object(this.props.params.className) ),
+          : new Parse.Object(this.props.params.className)),
       });
     }
   }
 
-  abortAddRow(){
-    if(this.state.newObject){
+  abortAddRow() {
+    if (this.state.newObject) {
       this.setState({
         newObject: null
       });
@@ -430,7 +430,7 @@ class Browser extends DashboardView {
     }
   }
 
-  saveNewRow(){
+  saveNewRow() {
     const { useMasterKey } = this.state;
     const obj = this.state.newObject;
     if (!obj) {
@@ -443,21 +443,21 @@ class Browser extends DashboardView {
     if (className) {
       let classColumns = this.props.schema.data.get('classes').get(className);
       classColumns.forEach(({ required }, name) => {
-          if (name === 'objectId' || this.state.isUnique && name !== this.state.uniqueField) {
-            return;
-          }
-          if (required) {
+        if (name === 'objectId' || this.state.isUnique && name !== this.state.uniqueField) {
+          return;
+        }
+        if (required) {
+          requiredCols.push(name);
+        }
+        if (className === '_User' && (name === 'username' || name === 'password')) {
+          if (!obj.get('authData')) {
             requiredCols.push(name);
           }
-          if (className === '_User' && (name === 'username' || name === 'password')) {
-            if (!obj.get('authData')) {
-              requiredCols.push(name);
-            }
-          }
-          if (className === '_Role' && (name === 'name' || name === 'ACL')) {
-            requiredCols.push(name);
-          }
-        });
+        }
+        if (className === '_Role' && (name === 'name' || name === 'ACL')) {
+          requiredCols.push(name);
+        }
+      });
     }
     if (requiredCols.length) {
       for (let idx = 0; idx < requiredCols.length; idx++) {
@@ -547,21 +547,21 @@ class Browser extends DashboardView {
     if (className) {
       let classColumns = this.props.schema.data.get('classes').get(className);
       classColumns.forEach(({ required }, name) => {
-          if (name === 'objectId' || this.state.isUnique && name !== this.state.uniqueField) {
-            return;
-          }
-          if (required) {
+        if (name === 'objectId' || this.state.isUnique && name !== this.state.uniqueField) {
+          return;
+        }
+        if (required) {
+          requiredCols.push(name);
+        }
+        if (className === '_User' && (name === 'username' || name === 'password')) {
+          if (!obj.get('authData')) {
             requiredCols.push(name);
           }
-          if (className === '_User' && (name === 'username' || name === 'password')) {
-            if (!obj.get('authData')) {
-              requiredCols.push(name);
-            }
-          }
-          if (className === '_Role' && (name === 'name' || name === 'ACL')) {
-            requiredCols.push(name);
-          }
-        });
+        }
+        if (className === '_Role' && (name === 'name' || name === 'ACL')) {
+          requiredCols.push(name);
+        }
+      });
     }
     if (requiredCols.length) {
       for (let idx = 0; idx < requiredCols.length; idx++) {
@@ -756,7 +756,7 @@ class Browser extends DashboardView {
     } else {
       delete filteredCounts[source];
     }
-    this.setState({ data: data, filters, lastMax: MAX_ROWS_FETCHED , filteredCounts: filteredCounts});
+    this.setState({ data: data, filters, lastMax: MAX_ROWS_FETCHED, filteredCounts: filteredCounts });
   }
 
   async fetchRelation(relation, filters = new List()) {
@@ -880,9 +880,9 @@ class Browser extends DashboardView {
 
   handlePointerClick({ className, id, field = 'objectId' }) {
     let filters = JSON.stringify([{
-        field,
-        constraint: 'eq',
-        compareTo: id
+      field,
+      constraint: 'eq',
+      compareTo: id
     }]);
     this.props.navigate(generatePath(this.context, `browser/${className}?filters=${encodeURIComponent(filters)}`));
   }
@@ -893,7 +893,7 @@ class Browser extends DashboardView {
       constraint: 'eq',
       compareTo: id
     }]);
-    window.open(generatePath(this.context, `browser/${className}?filters=${encodeURIComponent(filters)}`),'_blank');
+    window.open(generatePath(this.context, `browser/${className}?filters=${encodeURIComponent(filters)}`), '_blank');
   }
 
   handleCLPChange(clp) {
@@ -909,7 +909,7 @@ class Browser extends DashboardView {
     let isNewObject = row === -1;
     let isEditCloneObj = row < -1;
     let obj = isNewObject ? this.state.newObject : this.state.data[row];
-    if(isEditCloneObj){
+    if (isEditCloneObj) {
       obj = this.state.editCloneRows[row + (this.state.editCloneRows.length + 1)];
     }
     if (!obj) {
@@ -1374,7 +1374,7 @@ class Browser extends DashboardView {
               // Stringify objects and arrays
               if (
                 Object.prototype.toString.call(colValue) ===
-                  '[object Object]' ||
+                '[object Object]' ||
                 Object.prototype.toString.call(colValue) === '[object Array]'
               ) {
                 colValue = JSON.stringify(colValue);
@@ -1460,10 +1460,10 @@ class Browser extends DashboardView {
     let columns = [];
     const classes = this.props.schema.data.get('classes');
     classes.get(className).forEach((field, name) => {
-        columns.push({
-          ...field,
-          name,
-        });
+      columns.push({
+        ...field,
+        name,
+      });
     });
     if (onlyTouchable) {
       let untouchable = DefaultColumns.All;
@@ -1549,22 +1549,22 @@ class Browser extends DashboardView {
     });
   }
 
-  handleShowAcl(row, col){
+  handleShowAcl(row, col) {
     this.dataBrowserRef.current.setEditing(true);
     this.dataBrowserRef.current.setCurrent({ row, col });
   }
 
   // skips key controls handling when dialog is opened
-  onDialogToggle(opened){
-    this.setState({showPermissionsDialog: opened});
+  onDialogToggle(opened) {
+    this.setState({ showPermissionsDialog: opened });
   }
 
-  async onChangeDefaultKey (name) {
+  async onChangeDefaultKey(name) {
     ColumnPreferences.setPointerDefaultKey(
       this.context.applicationId,
       this.props.params.className,
       name
-      );
+    );
     this.setState({ showPointerKeyDialog: false });
   }
 
@@ -1689,7 +1689,7 @@ class Browser extends DashboardView {
       }
     }
     let extras = null;
-    if(this.state.showPointerKeyDialog){
+    if (this.state.showPointerKeyDialog) {
       let currentColumns = this.getClassColumns(className).map(column => column.name);
       extras = (
         <PointerKeyDialog
@@ -1873,20 +1873,20 @@ class Browser extends DashboardView {
     }
 
     let notification = null;
-    const pageTitle = `${this.props.params.className} - Parse Dashboard`;
+    const pageTitle = `${this.props.params.className} - Servable Dashboard`;
 
     if (this.state.lastError) {
       notification = (
-        <Notification note={this.state.lastError} isErrorNote={true}/>
+        <Notification note={this.state.lastError} isErrorNote={true} />
       );
     } else if (this.state.lastNote) {
       notification = (
-        <Notification note={this.state.lastNote} isErrorNote={false}/>
+        <Notification note={this.state.lastNote} isErrorNote={false} />
       );
     }
     else if (this.state.exporting) {
       notification = (
-        <Notification note={`Exporting ${this.state.exportingCount}+ objects...`} isErrorNote={false}/>
+        <Notification note={`Exporting ${this.state.exportingCount}+ objects...`} isErrorNote={false} />
       );
     }
     return (

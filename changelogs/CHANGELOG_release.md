@@ -208,7 +208,7 @@
 [Full Changelog](https://github.com/parse-community/parse-dashboard/compare/2.2.0...3.0.0)
 
 ## BREAKING CHANGE
-- Parse Dashboard requires Node >=12.0.0 <16.0.0
+- Servable Dashboard requires Node >=12.0.0 <16.0.0
 - Reverts PR [#1706](https://github.com/parse-community/parse-dashboard/pull/1706) which introduced new database index requirements for pagination and was a breaking change that can lead to database performance issues if database indices were not adapted; reverting #1706 removes the `objectId` from the compound query; make sure that the database indices satisfy your dashboard sorting and filter usage before upgrading to this release to prevent database performance issues due to missing indices (Christopher Brookes) [#1800](https://github.com/parse-community/parse-dashboard/pull/1800)
 
 ## New Features
@@ -339,7 +339,7 @@ __Fixes:__
 * NEW: Add required and default value options ([#1193](https://github.com/parse-community/parse-dashboard/pull/1193)), thanks to [Lucas Alencar](https://github.com/alencarlucas)
 
 #### Breaking Changes:
-* Parse Dashboard now requires Node.js version >= 8.9
+* Servable Dashboard now requires Node.js version >= 8.9
 
 ### 1.4.3
 [Full Changelog](https://github.com/parse-community/parse-dashboard/compare/1.4.2...1.4.3)
@@ -550,7 +550,7 @@ __Fixes:__
 * Add the ability to mount the dashboard express app on a custom mount path, thanks to [hpello](https://github.com/hpello) with bugfixes from [mamaso](https://github.com/mamaso)
 * Add ability to restrict certain users to certain apps, thanks to [Felipe Andrade](https://github.com/felipemobile)
 * Fix Dockerfile, thanks to [Kakashi Liu](https://github.com/kkc)
-* Display Parse Dashboard version, thanks to [Aayush Kapoor](https://github.com/xeoneux) and [gateway](https://github.com/gateway)
+* Display Servable Dashboard version, thanks to [Aayush Kapoor](https://github.com/xeoneux) and [gateway](https://github.com/gateway)
 * Add a refresh button to the data browser, thanks to [TylerBrock](https://github.com/TylerBrock)
 * Add logs viewer
 * Misc. performance improvements and bugfixes, thanks to [Pavel Ivanov](https://github.com/pivanov)

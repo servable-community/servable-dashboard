@@ -5,17 +5,17 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import Icon     from 'components/Icon/Icon.react';
+import Icon from 'components/Icon/Icon.react';
 import { Link } from 'react-router-dom';
-import React    from 'react';
-import styles   from 'components/Sidebar/Sidebar.scss';
+import React from 'react';
+import styles from 'components/Sidebar/Sidebar.scss';
 // get the package.json environment variable
 const version = process.env.version;
 
 export default class SidebarHeader extends React.Component {
   constructor() {
     super();
-    this.state = { };
+    this.state = {};
   }
   render() {
     const { isCollapsed = false, dashboardUser } = this.props;
@@ -33,7 +33,7 @@ export default class SidebarHeader extends React.Component {
           <Link to='/apps'>
             <div className={styles.version}>
               <div>
-                Parse Dashboard {version}
+                Servable Dashboard {version}
                 <div>
                   {dashboardUser}
                 </div>

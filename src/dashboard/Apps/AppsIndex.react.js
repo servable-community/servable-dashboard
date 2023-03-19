@@ -5,17 +5,17 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import AppsManager   from 'lib/AppsManager';
-import FlowFooter    from 'components/FlowFooter/FlowFooter.react';
-import html          from 'lib/htmlString';
-import Icon          from 'components/Icon/Icon.react';
+import AppsManager from 'lib/AppsManager';
+import FlowFooter from 'components/FlowFooter/FlowFooter.react';
+import html from 'lib/htmlString';
+import Icon from 'components/Icon/Icon.react';
 import joinWithFinal from 'lib/joinWithFinal';
-import LiveReload    from 'components/LiveReload/LiveReload.react';
-import prettyNumber  from 'lib/prettyNumber';
-import React         from 'react';
-import styles        from 'dashboard/Apps/AppsIndex.scss';
-import baseStyles    from 'stylesheets/base.scss';
-import AppBadge      from 'components/AppBadge/AppBadge.react';
+import LiveReload from 'components/LiveReload/LiveReload.react';
+import prettyNumber from 'lib/prettyNumber';
+import React from 'react';
+import styles from 'dashboard/Apps/AppsIndex.scss';
+import baseStyles from 'stylesheets/base.scss';
+import AppBadge from 'components/AppBadge/AppBadge.react';
 import { withRouter } from 'lib/withRouter';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,27 +30,27 @@ function dash(value, content) {
 }
 /* eslint-disable no-unused-vars */
 let CloningNote = ({ app, clone_status, clone_progress }) => {
-/* eslint-enable */
+  /* eslint-enable */
   if (clone_status === 'failed') {
     //TODO: add a way to delete failed clones, like in old dash
     return <div>Clone failed</div>
   }
   let progress = <LiveReload
-    initialData={[{appId: app.applicationId, progress: clone_progress}]}
+    initialData={[{ appId: app.applicationId, progress: clone_progress }]}
     source='/apps/cloning_progress'
     render={data => {
       let currentAppProgress = data.find(({ appId }) => appId === app.applicationId);
       let progressStr = currentAppProgress ? currentAppProgress.progress.toString() : '0';
       return <span>{progressStr}</span>;
-    }}/>
+    }} />
   return <div>Cloning is {progress}% complete</div>
 };
 
 let CountsSection = ({ className, title, children }) =>
- <div className={className}>
-   <div className={styles.section}>{title}</div>
-   {children}
- </div>
+  <div className={className}>
+    <div className={styles.section}>{title}</div>
+    {children}
+  </div>
 
 let Metric = (props) => {
   return (
@@ -68,15 +68,15 @@ let AppCard = ({
   const navigate = useNavigate();
   let canBrowse = app.serverInfo.error ? null : () => navigate(html`/apps/${app.slug}/browser`);
   let versionMessage = app.serverInfo.error ?
-    <div className={styles.serverVersion}>Server not reachable: <span className={styles.ago}>{app.serverInfo.error.toString()}</span></div>:
+    <div className={styles.serverVersion}>Server not reachable: <span className={styles.ago}>{app.serverInfo.error.toString()}</span></div> :
     <div className={styles.serverVersion}>
-    Server URL: <span className={styles.ago}>{app.serverURL || 'unknown'}</span>
-    Server version: <span className={styles.ago}>{app.serverInfo.parseServerVersion || 'unknown'}</span>
+      Server URL: <span className={styles.ago}>{app.serverURL || 'unknown'}</span>
+      Server version: <span className={styles.ago}>{app.serverInfo.parseServerVersion || 'unknown'}</span>
     </div>;
 
   return <li onClick={canBrowse} style={{ background: app.primaryBackgroundColor }}>
     <a className={styles.icon}>
-      {icon ? <img src={'appicons/' + icon} width={56} height={56}/> : <Icon width={56} height={56} name='blank-app-outline' fill='#1E384D' />}
+      {icon ? <img src={'appicons/' + icon} width={56} height={56} /> : <Icon width={56} height={56} name='blank-app-outline' fill='#1E384D' />}
     </a>
     <div className={styles.details}>
       <a className={styles.appname}>{app.name}</a>
@@ -146,7 +146,7 @@ class AppsIndex extends React.Component {
         {feature}
       </strong>);
       upgradePrompt = <FlowFooter>
-        Upgrade to the <a href='https://www.npmjs.com/package/parse-dashboard' target='_blank'>latest version</a> of Parse Dashboard to get access to: {joinWithFinal('', newFeaturesNodes, ', ', ' and ')}.
+        Upgrade to the <a href='https://www.npmjs.com/package/parse-dashboard' target='_blank'>latest version</a> of Servable Dashboard to get access to: {joinWithFinal('', newFeaturesNodes, ', ', ' and ')}.
       </FlowFooter>
     }
     return (
@@ -163,7 +163,7 @@ class AppsIndex extends React.Component {
         <ul className={styles.apps}>
           {apps.map(app =>
             app.name.toLowerCase().indexOf(search) > -1 ?
-              <AppCard key={app.slug} app={app} icon={app.icon ? app.icon : null}/> :
+              <AppCard key={app.slug} app={app} icon={app.icon ? app.icon : null} /> :
               null
           )}
         </ul>

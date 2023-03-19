@@ -52,7 +52,7 @@ const getAlgorithm = async () => {
       message: 'Enter how long the one-time password should be valid (in seconds):'
     }
   ])
-  return { algorithm, digits, period};
+  return { algorithm, digits, period };
 };
 const generateSecret = ({ app, username, algorithm, digits, period }) => {
   const secret = new OTPAuth.Secret();
@@ -90,8 +90,8 @@ const showQR = text => {
 };
 
 const showInstructions = ({ app, username, passwordCopied, encrypt, config }) => {
-  const {secret, url} = config;
-  const mfaJSON = {...config};
+  const { secret, url } = config;
+  const mfaJSON = { ...config };
   delete mfaJSON.url;
   let orderCounter = 0;
   const getOrder = () => {
@@ -104,7 +104,7 @@ const showInstructions = ({ app, username, passwordCopied, encrypt, config }) =>
   );
 
   console.log(
-    `\n${getOrder()}. Add the following settings for user "${username}" ${app ? `in app "${app}" ` : '' }to the Parse Dashboard configuration.` +
+    `\n${getOrder()}. Add the following settings for user "${username}" ${app ? `in app "${app}" ` : ''}to the Servable Dashboard configuration.` +
     `\n\n   ${JSON.stringify(mfaJSON)}`
   );
 
@@ -129,7 +129,7 @@ const showInstructions = ({ app, username, passwordCopied, encrypt, config }) =>
       `\n${getOrder()}. Make sure that "useEncryptedPasswords" is set to "true" in your dashboard configuration.` +
       '\n   You chose to generate an encrypted password for this user.' +
       '\n   Any existing users with non-encrypted passwords will require newly created, encrypted passwords.'
-      );
+    );
   }
   console.log(
     '\n------------------------------------------------------------------------------\n'
@@ -198,12 +198,12 @@ module.exports = {
         }
       ]);
       const { algorithm, digits, period } = await getAlgorithm();
-      const secret  =generateSecret({ app, username, algorithm, digits, period });
+      const secret = generateSecret({ app, username, algorithm, digits, period });
       Object.assign(config, secret.config);
       showQR(secret.config.url);
     }
     config.user = data.user;
-    config.pass = data.pass ;
+    config.pass = data.pass;
     showInstructions({ app: data.app, username, passwordCopied: true, encrypt, config });
   },
   async createMFA() {

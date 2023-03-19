@@ -1,4 +1,4 @@
-# Contributing to Parse Dashboard
+# Contributing to Servable Dashboard
 We want to make contributing to this project as easy and transparent as
 possible.
 
@@ -24,5 +24,5 @@ We use GitHub issues to track public bugs. Please ensure your description is
 clear and has sufficient instructions to be able to reproduce the issue.
 
 ## License
-By contributing to Parse Dashboard, you agree that your contributions will be licensed
+By contributing to Servable Dashboard, you agree that your contributions will be licensed
 under its license.

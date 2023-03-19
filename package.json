@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/ParsePlatform/parse-dashboard"
   },
-  "description": "The Parse Dashboard",
+  "description": "The Servable Dashboard",
   "parseDashboardFeatures": [
     "Data Browser",
     "Cloud Code Viewer",

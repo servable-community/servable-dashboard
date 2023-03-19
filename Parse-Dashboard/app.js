@@ -36,26 +36,26 @@ function checkIfIconsExistForApps(apps, iconsFolder) {
     var iconName = currentApp.iconName;
     var path = iconsFolder + '/' + iconName;
 
-    fs.stat(path, function(err) {
+    fs.stat(path, function (err) {
       if (err) {
-          if ('ENOENT' == err.code) {// file does not exist
-              console.warn('Icon with file name: ' + iconName +' couldn\'t be found in icons folder!');
-          } else {
-            console.log(
-              'An error occurd while checking for icons, please check permission!');
-          }
+        if ('ENOENT' == err.code) {// file does not exist
+          console.warn('Icon with file name: ' + iconName + ' couldn\'t be found in icons folder!');
+        } else {
+          console.log(
+            'An error occurd while checking for icons, please check permission!');
+        }
       } else {
-          //every thing was ok so for example you can read it and send it to client
+        //every thing was ok so for example you can read it and send it to client
       }
-  } );
+    });
   }
 }
 
-module.exports = function(config, options) {
+module.exports = function (config, options) {
   options = options || {};
   var app = express();
   // Serve public files.
-  app.use(express.static(path.join(__dirname,'public')));
+  app.use(express.static(path.join(__dirname, 'public')));
 
   // Allow setting via middleware
   if (config.trustProxy && app.disabled('trust proxy')) {
@@ -63,7 +63,7 @@ module.exports = function(config, options) {
   }
 
   // wait for app to mount in order to get mountpath
-  app.on('mount', function() {
+  app.on('mount', function () {
     const mountPath = getMount(app.mountpath);
     const users = config.users;
     const useEncryptedPasswords = config.useEncryptedPasswords ? true : false;
@@ -80,7 +80,7 @@ module.exports = function(config, options) {
     });
 
     // Serve the configuration.
-    app.get('/parse-dashboard-config.json', function(req, res) {
+    app.get('/parse-dashboard-config.json', function (req, res) {
       let apps = config.apps.map((app) => Object.assign({}, app)); // make a copy
       let response = {
         apps: apps,
@@ -96,12 +96,12 @@ module.exports = function(config, options) {
       if (!options.dev && !requestIsLocal) {
         if (!req.secure && !options.allowInsecureHTTP) {
           //Disallow HTTP requests except on localhost, to prevent the master key from being transmitted in cleartext
-          return res.send({ success: false, error: 'Parse Dashboard can only be remotely accessed via HTTPS' });
+          return res.send({ success: false, error: 'Servable Dashboard can only be remotely accessed via HTTPS' });
         }
 
         if (!users) {
           //Accessing the dashboard over the internet can only be done with username and password
-          return res.send({ success: false, error: 'Configure a user to access Parse Dashboard remotely' });
+          return res.send({ success: false, error: 'Configure a user to access Servable Dashboard remotely' });
         }
       }
       const authentication = req.user;
@@ -172,7 +172,7 @@ module.exports = function(config, options) {
       }
     }
 
-    app.get('/login', csrf(), function(req, res) {
+    app.get('/login', csrf(), function (req, res) {
       const redirectURL = req.url.includes('?redirect=') && req.url.split('?redirect=')[1].length > 1 && req.url.split('?redirect=')[1];
       if (!users || (req.user && req.user.isAuthenticated)) {
         return res.redirect(`${mountPath}${redirectURL || 'apps'}`);
@@ -192,7 +192,7 @@ module.exports = function(config, options) {
           <script>
             PARSE_DASHBOARD_PATH = "${mountPath}";
           </script>
-          <title>Parse Dashboard</title>
+          <title>Servable Dashboard</title>
         </head>
         <body>
           <div id="login_mount"></div>
@@ -205,7 +205,7 @@ module.exports = function(config, options) {
     });
 
     // For every other request, go to index.html. Let client-side handle the rest.
-    app.get('/*', function(req, res) {
+    app.get('/*', function (req, res) {
       if (users && (!req.user || !req.user.isAuthenticated)) {
         const redirect = req.url.replace('/login', '');
         if (redirect.length > 1) {
@@ -213,7 +213,7 @@ module.exports = function(config, options) {
         }
         return res.redirect(`${mountPath}login`);
       }
-      if (users && req.user && req.user.matchingUsername ) {
+      if (users && req.user && req.user.matchingUsername) {
         res.append('username', req.user.matchingUsername);
       }
       res.send(`<!DOCTYPE html>
@@ -224,7 +224,7 @@ module.exports = function(config, options) {
           <script>
             PARSE_DASHBOARD_PATH = "${mountPath}";
           </script>
-          <title>Parse Dashboard</title>
+          <title>Servable Dashboard</title>
         </head>
         <body>
           <div id="browser_mount"></div>
