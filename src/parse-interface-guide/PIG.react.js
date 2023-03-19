@@ -6,14 +6,14 @@
  * the root directory of this source tree.
  */
 import * as ComponentsMap from 'parse-interface-guide/ComponentsMap';
-import { NavLink }        from 'react-router-dom';
-import Icon               from 'components/Icon/Icon.react';
-import PropsTable         from 'parse-interface-guide/PropsTable.react';
-import React              from 'react';
-import styles             from 'parse-interface-guide/PIG.scss';
-import beautify           from 'js-beautify';
-import CodeSnippet        from 'components/CodeSnippet/CodeSnippet.react';
-import { withRouter }     from 'lib/withRouter';
+import { NavLink } from 'react-router-dom';
+import Icon from 'components/Icon/Icon.react';
+import PropsTable from 'parse-interface-guide/PropsTable.react';
+import React from 'react';
+import styles from 'parse-interface-guide/PIG.scss';
+import beautify from 'js-beautify';
+import CodeSnippet from 'components/CodeSnippet/CodeSnippet.react';
+import { withRouter } from 'lib/withRouter';
 
 let PIGRow = ({ title, children }) => <div>
   <div className={styles.header}>{title}</div>
@@ -44,8 +44,8 @@ class PIG extends React.Component {
           className={styles.searchField}
           onChange={(e) => {
             let query = e.target.value.trim();
-            this.setState({query});
-          }}/>
+            this.setState({ query });
+          }} />
         {components.map((name) => {
           return name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
             ? <NavLink className={({ isActive }) => isActive ? styles.active : undefined} key={name} to={`/${name}`}>{name}</NavLink>
@@ -69,13 +69,13 @@ class PIG extends React.Component {
           <div key={demo.name || i} className={styles.table}>
             <PIGRow title={demo.name || 'Demo'}>{typeof demo.render === 'function' ? demo.render() : demo()}</PIGRow>
             <PIGRow title={(demo.name || '') + ' Source'}>
-              <CodeSnippet source={beautify((typeof demo.render === 'function' ? demo.render : demo).toString())} language='javascript' fullPage={false}/>
+              <CodeSnippet source={beautify((typeof demo.render === 'function' ? demo.render : demo).toString())} language='javascript' fullPage={false} />
             </PIGRow>
           </div>
         ))}
         <div className={styles.table}>
           <PIGRow title={componentInfo.component.name + '.render() Source'}>
-            <CodeSnippet source={beautify((typeof componentInfo.component.render === 'function' ? componentInfo.component.render : componentInfo.component).toString())} language='javascript' fullPage={false}/>
+            <CodeSnippet source={beautify((typeof componentInfo.component.render === 'function' ? componentInfo.component.render : componentInfo.component).toString())} language='javascript' fullPage={false} />
           </PIGRow>
         </div>
       </div>

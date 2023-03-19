@@ -22,7 +22,7 @@
 
 ---
 
-Parse Dashboard is a standalone dashboard for managing your [Parse Server](https://github.com/ParsePlatform/parse-server) apps.
+Servable Dashboard is a standalone dashboard for managing your [Parse Server](https://github.com/ParsePlatform/parse-server) apps.
 
 ---
 
@@ -30,7 +30,7 @@ Parse Dashboard is a standalone dashboard for managing your [Parse Server](https
   - [Compatibility](#compatibility)
     - [Parse Server](#parse-server)
     - [Node.js](#nodejs)
-  - [Configuring Parse Dashboard](#configuring-parse-dashboard)
+  - [Configuring Servable Dashboard](#configuring-parse-dashboard)
     - [File](#file)
     - [Environment variables](#environment-variables)
       - [Multiple apps](#multiple-apps)
@@ -43,7 +43,7 @@ Parse Dashboard is a standalone dashboard for managing your [Parse Server](https
     - [Prevent columns sorting](#prevent-columns-sorting)
     - [Custom order in the filter popup](#custom-order-in-the-filter-popup)
 - [Running as Express Middleware](#running-as-express-middleware)
-- [Deploying Parse Dashboard](#deploying-parse-dashboard)
+- [Deploying Servable Dashboard](#deploying-parse-dashboard)
   - [Preparing for Deployment](#preparing-for-deployment)
   - [Security Considerations](#security-considerations)
     - [Configuring Basic Authentication](#configuring-basic-authentication)
@@ -78,29 +78,29 @@ parse-dashboard --dev --appId yourAppId --masterKey yourMasterKey --serverURL "h
 
 You may set the host, port and mount path by supplying the `--host`, `--port` and `--mountPath` options to parse-dashboard. You can use anything you want as the app name, or leave it out in which case the app ID will be used.
 
-The `--dev` parameter disables production-ready security features. This parameter is useful when running Parse Dashboard on Docker. Using this parameter will:
+The `--dev` parameter disables production-ready security features. This parameter is useful when running Servable Dashboard on Docker. Using this parameter will:
 
 - allow insecure http connections from anywhere, bypassing the option `allowInsecureHTTP`
 - allow the Parse Server `masterKey` to be transmitted in cleartext without encryption
 - allow dashboard access without user authentication
 
-> ⚠️ Do not use this parameter when deploying Parse Dashboard in a production environment.
+> ⚠️ Do not use this parameter when deploying Servable Dashboard in a production environment.
 
 After starting the dashboard, you can visit http://localhost:4040 in your browser:
 
-![Parse Dashboard](.github/dash-shot.png)
+![Servable Dashboard](.github/dash-shot.png)
 
 ## Compatibility
 
 ### Parse Server
-Parse Dashboard is compatible with the following Parse Server versions.
+Servable Dashboard is compatible with the following Parse Server versions.
 
-| Parse Dashboard Version | Parse Server Version | Compatible |
+| Servable Dashboard Version | Parse Server Version | Compatible |
 |-------------------------|----------------------|------------|
 | >=1.0                   | >= 2.1.4             | ✅ Yes      |
 
 ### Node.js
-Parse Dashboard is continuously tested with the most recent releases of Node.js to ensure compatibility. We follow the [Node.js Long Term Support plan](https://github.com/nodejs/Release) and only test against versions that are officially supported and have not reached their end-of-life date.
+Servable Dashboard is continuously tested with the most recent releases of Node.js to ensure compatibility. We follow the [Node.js Long Term Support plan](https://github.com/nodejs/Release) and only test against versions that are officially supported and have not reached their end-of-life date.
 
 | Version    | Latest Version | End-of-Life | Compatible   |
 |------------|----------------|-------------|--------------|
@@ -108,11 +108,11 @@ Parse Dashboard is continuously tested with the most recent releases of Node.js 
 | Node.js 16 | 16.17.0        | April 2024  | ✅ Yes        |
 | Node.js 18 | 18.9.0         | May 2025    | ✅ Yes        |
 
-## Configuring Parse Dashboard
+## Configuring Servable Dashboard
 
 ### File
 
-You can also start the dashboard from the command line with a config file.  To do this, create a new file called `parse-dashboard-config.json` inside your local Parse Dashboard directory hierarchy.  The file should match the following format:
+You can also start the dashboard from the command line with a config file.  To do this, create a new file called `parse-dashboard-config.json` inside your local Servable Dashboard directory hierarchy.  The file should match the following format:
 
 ```json
 {
@@ -186,7 +186,7 @@ Managing multiple apps from the same dashboard is also possible. Simply add addi
 
 ## GraphQL Playground
 
-Parse Dashboard has a built-in GraphQL Playground to play with the auto-generated [Parse GraphQL API](https://github.com/parse-community/parse-server#graphql).
+Servable Dashboard has a built-in GraphQL Playground to play with the auto-generated [Parse GraphQL API](https://github.com/parse-community/parse-server#graphql).
 
 You can setup the GraphQL Playground by passing the `--graphQLServerURL` option to the `parse-dashboard` CLI:
 
@@ -232,11 +232,11 @@ You can also setup the GraphQL Playground in your `parse-dashboard-config.json` 
 
 After starting the dashboard, you can visit http://0.0.0.0:4040/apps/MyTestApp/api_console/graphql in your browser:
 
-![Parse Dashboard GraphQL Playground](.github/graphql-playground.png)
+![Servable Dashboard GraphQL Playground](.github/graphql-playground.png)
 
 ## App Icon Configuration
 
-Parse Dashboard supports adding an optional icon for each app, so you can identify them easier in the list. To do so, you *must* use the configuration file, define an `iconsFolder` in it, and define the `iconName` parameter for each app (including the extension). The path of the `iconsFolder` is relative to the configuration file. If you have installed ParseDashboard globally you need to use the full path as value for the `iconsFolder`. To visualize what it means, in the following example `icons` is a directory located under the same directory as the configuration file:
+Servable Dashboard supports adding an optional icon for each app, so you can identify them easier in the list. To do so, you *must* use the configuration file, define an `iconsFolder` in it, and define the `iconName` parameter for each app (including the extension). The path of the `iconsFolder` is relative to the configuration file. If you have installed ParseDashboard globally you need to use the full path as value for the `iconsFolder`. To visualize what it means, in the following example `icons` is a directory located under the same directory as the configuration file:
 
 ```json
 {
@@ -255,7 +255,7 @@ Parse Dashboard supports adding an optional icon for each app, so you can identi
 
 ## App Background Color Configuration
 
-Parse Dashboard supports adding an optional background color for each app, so you can identify them easier in the list. To do so, you *must* use the configuration file, define an `primaryBackgroundColor` and `secondaryBackgroundColor` in it, parameter for each app. It is `CSS style`. To visualize what it means, in the following example `backgroundColor` is a configuration file:
+Servable Dashboard supports adding an optional background color for each app, so you can identify them easier in the list. To do so, you *must* use the configuration file, define an `primaryBackgroundColor` and `secondaryBackgroundColor` in it, parameter for each app. It is `CSS style`. To visualize what it means, in the following example `backgroundColor` is a configuration file:
 
 ```json
 {
@@ -364,7 +364,7 @@ You can conveniently create a filter definition without having to write it by ha
 
 # Running as Express Middleware
 
-Instead of starting Parse Dashboard with the CLI, you can also run it as an [express](https://github.com/expressjs/express) middleware.
+Instead of starting Servable Dashboard with the CLI, you can also run it as an [express](https://github.com/expressjs/express) middleware.
 
 ```javascript
 var express = require('express');
@@ -383,14 +383,14 @@ var dashboard = new ParseDashboard({
 
 var app = express();
 
-// make the Parse Dashboard available at /dashboard
+// make the Servable Dashboard available at /dashboard
 app.use('/dashboard', dashboard);
 
 var httpServer = require('http').createServer(app);
 httpServer.listen(4040);
 ```
 
-If you want to run both [Parse Server](https://github.com/ParsePlatform/parse-server) and Parse Dashboard on the same server/port, you can run them both as express middleware:
+If you want to run both [Parse Server](https://github.com/ParsePlatform/parse-server) and Servable Dashboard on the same server/port, you can run them both as express middleware:
 
 ```javascript
 var express = require('express');
@@ -404,7 +404,7 @@ var api = new ParseServer({
 var options = { allowInsecureHTTP: false };
 
 var dashboard = new ParseDashboard({
-	// Parse Dashboard settings
+	// Servable Dashboard settings
 }, options);
 
 var app = express();
@@ -412,14 +412,14 @@ var app = express();
 // make the Parse Server available at /parse
 app.use('/parse', api);
 
-// make the Parse Dashboard available at /dashboard
+// make the Servable Dashboard available at /dashboard
 app.use('/dashboard', dashboard);
 
 var httpServer = require('http').createServer(app);
 httpServer.listen(4040);
 ```
 
-# Deploying Parse Dashboard
+# Deploying Servable Dashboard
 
 ## Preparing for Deployment
 
@@ -493,7 +493,7 @@ If you create a new user by running `parse-dashboard --createUser`, you will be 
 }
 ```
 
- Parse Dashboard follows the industry standard and supports the common OTP algorithm `SHA-1` by default, to be compatible with most authenticator apps. If you have specific security requirements regarding TOTP characteristics (algorithm, digit length, time period) you can customize them by using the guided configuration mentioned above.
+ Servable Dashboard follows the industry standard and supports the common OTP algorithm `SHA-1` by default, to be compatible with most authenticator apps. If you have specific security requirements regarding TOTP characteristics (algorithm, digit length, time period) you can customize them by using the guided configuration mentioned above.
 
 ### Separating App Access Based on User Identity
 If you have configured your dashboard to manage multiple applications, you can restrict the management of apps based on user identity.
@@ -709,7 +709,7 @@ This feature will take either selected rows or all rows of an individual class a
 
 # Contributing
 
-We really want Parse to be yours, to see it grow and thrive in the open source community. Please see the [Contributing to Parse Dashboard guide](CONTRIBUTING.md).
+We really want Parse to be yours, to see it grow and thrive in the open source community. Please see the [Contributing to Servable Dashboard guide](CONTRIBUTING.md).
 
 -----
 
