@@ -1,10 +1,10 @@
 {
   "apps": [
     {
-      "serverURL": "http://localhost:1337/parse",
-      "appId": "hello",
-      "masterKey": "world",
-      "appName": "",
+      "serverURL": "http://localhost:1391/parse",
+      "appId": "love",
+      "masterKey": "MASTER_KEY_TO_CHANGE",
+      "appName": "Love",
       "iconName": "",
       "primaryBackgroundColor": "",
       "secondaryBackgroundColor": ""
