@@ -5,13 +5,13 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import CodeSnippet   from 'components/CodeSnippet/CodeSnippet.react';
+import CodeSnippet from 'components/CodeSnippet/CodeSnippet.react';
 import DashboardView from 'dashboard/DashboardView.react';
-import EmptyState    from 'components/EmptyState/EmptyState.react';
-import FileTree      from 'components/FileTree/FileTree.react';
-import React         from 'react';
-import styles        from 'dashboard/Data/CloudCode/CloudCode.scss';
-import Toolbar       from 'components/Toolbar/Toolbar.react';
+import EmptyState from 'components/EmptyState/EmptyState.react';
+import FileTree from 'components/FileTree/FileTree.react';
+import React from 'react';
+import styles from 'dashboard/Data/CloudCode/CloudCode.scss';
+import Toolbar from 'components/Toolbar/Toolbar.react';
 import generatePath from 'lib/generatePath';
 import { withRouter } from 'lib/withRouter';
 

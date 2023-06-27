@@ -52,17 +52,25 @@ export const SpecialClasses = [
   '_Product',
   '_Session',
   '_PushStatus',
+  'ServableApp',
+  'ServableConfig',
+  'ServableConfigCondition',
+  'ServableConfigGroup',
+  'ServableConfigEntry',
+  'ServableConfigEntryInCondition',
+  'ServableConfigConditionType'
 ];
 
 export const DefaultColumns = {
-  All: [ 'objectId', 'ACL', 'createdAt', 'updatedAt' ],
-
-  _User: [ 'username', 'password', 'email', 'emailVerified', 'authData' ],
-  _Installation: [ 'installationId', 'deviceToken', 'channels', 'deviceType', 'pushType', 'GCMSenderId', 'timeZone', 'localeIdentifier', 'badge' ],
-  _Role: [ 'name', 'users', 'roles' ],
-  _Product: [ 'order', 'productIdentifier', 'icon', 'title', 'subtitle', 'download', 'downloadName' ],
-  _Session: [ 'restricted', 'user', 'installationId', 'sessionToken', 'expiresAt', 'createdWith' ],
-  _PushStatus: [ 'pushTime', 'query', 'pushHash', 'payload', 'status', 'sentPerType', 'failedPerType', 'numSent', 'numFailed', 'errorMessage', 'source' ],
+  All: ['objectId', 'ACL', 'createdAt', 'updatedAt'],
+  ServableApp: ['name',],
+  ServableConfig: ['name'],
+  _User: ['username', 'password', 'email', 'emailVerified', 'authData'],
+  _Installation: ['installationId', 'deviceToken', 'channels', 'deviceType', 'pushType', 'GCMSenderId', 'timeZone', 'localeIdentifier', 'badge'],
+  _Role: ['name', 'users', 'roles'],
+  _Product: ['order', 'productIdentifier', 'icon', 'title', 'subtitle', 'download', 'downloadName'],
+  _Session: ['restricted', 'user', 'installationId', 'sessionToken', 'expiresAt', 'createdWith'],
+  _PushStatus: ['pushTime', 'query', 'pushHash', 'payload', 'status', 'sentPerType', 'failedPerType', 'numSent', 'numFailed', 'errorMessage', 'source'],
 };
 
 export const DataTypes = [

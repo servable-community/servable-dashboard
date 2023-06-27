@@ -1,10 +1,10 @@
 {
   "apps": [
     {
-      "serverURL": "http://localhost:1337/parse",
-      "appId": "manivel",
+      "serverURL": "http://localhost:1391/parse",
+      "appId": "love",
       "masterKey": "MASTER_KEY_TO_CHANGE",
-      "appName": "Manivel",
+      "appName": "Love",
       "iconName": "",
       "primaryBackgroundColor": "",
       "secondaryBackgroundColor": ""

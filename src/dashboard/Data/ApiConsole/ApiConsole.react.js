@@ -5,7 +5,6 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import React from 'react';
 import CategoryList from 'components/CategoryList/CategoryList.react';
 import DashboardView from 'dashboard/DashboardView.react';
 import { Outlet } from 'react-router-dom';

@@ -14,7 +14,8 @@ const parseDashboard = require('./app');
 
 module.exports = (options) => {
   const host = options.host || process.env.HOST || '0.0.0.0';
-  const port = options.port || process.env.PORT || 4040;
+  // const port = options.port || process.env.PORT || 4040;
+  const port = 5050;
   const mountPath = options.mountPath || process.env.MOUNT_PATH || '/';
   const allowInsecureHTTP = options.allowInsecureHTTP || process.env.PARSE_DASHBOARD_ALLOW_INSECURE_HTTP;
   const cookieSessionSecret = options.cookieSessionSecret || process.env.PARSE_DASHBOARD_COOKIE_SESSION_SECRET;
@@ -149,7 +150,7 @@ module.exports = (options) => {
   let dashboardOptions = { allowInsecureHTTP, cookieSessionSecret, dev, cookieSessionMaxAge };
   app.use(mountPath, parseDashboard(config.data, dashboardOptions));
   let server;
-  if(!configSSLKey || !configSSLCert){
+  if (!configSSLKey || !configSSLCert) {
     // Start the server.
     server = app.listen(port, host, function () {
       console.log(`The dashboard is now available at http://${server.address().address}:${server.address().port}${mountPath}`);
